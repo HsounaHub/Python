@@ -26,9 +26,16 @@ class user:
             print(f"your have now {self.gold_card_points} poins")
         if self.gold_card_points - amount <0:
             print("you don't have enough points" )
-aymen=user("aymen","ben moussa","aymen@gmail.com",24,True,8)
+user3=user("aymen","ben moussa","aymen@gmail.com",24,True,8)
 #aymen.display_info()
-ali=user("ali","hsouna","ali@gmail.com",28,False)
-aziz=user("aziz","med saleh","aziz@gmail.com",19,True,300)
-ali.enroll()
-ali.display_info()
+user1=user("ali","hsouna","ali@gmail.com",28,False)
+user2=user("aziz","med saleh","aziz@gmail.com",19,True,300)
+
+user1.display_info()
+user1.enroll()
+user1.spend_points(50)
+user1.display_info()
+user2.enroll()
+user2.spend_points(80)
+user2.display_info()
+
