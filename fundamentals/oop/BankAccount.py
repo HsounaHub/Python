@@ -1,8 +1,8 @@
 class BankAccount:
     # don't forget to add some default values for these parameters!
     all_instances=[]
-    def __init__(self, int_rate=1, balance=0): 
-        self.int_rate=int_rate/100
+    def __init__(self, int_rate=0.01, balance=0): 
+        self.int_rate=int_rate
         self.balance=balance
         BankAccount.all_instances.append(self)
     def deposit(self, amount):
@@ -26,8 +26,27 @@ class BankAccount:
         for item in cls.all_instances:
             print(item)
 
-account1=BankAccount(3,500)
-account2=BankAccount(2,400)
+# account1=BankAccount(0.03,500)
+# account2=BankAccount(0.02,400)
 
-account1.deposit(100).deposit(200).deposit(100).withdraw(300).yield_interest().display_account_info()
-account2.deposit(200).deposit(100).withdraw(100).withdraw(200).withdraw(100).withdraw(300).yield_interest().display_account_info()
+# account1.deposit(100).deposit(200).deposit(100).withdraw(300).yield_interest().display_account_info()
+# account2.deposit(200).deposit(100).withdraw(100).withdraw(200).withdraw(100).withdraw(300).yield_interest().display_account_info()
+
+class User:
+    def __init__(self, name, email):
+        self.name = name
+        self.email = email
+        self.account = BankAccount(int_rate=0.02, balance=0)
+    
+    # other methods
+    
+    def make_deposit(self, amount):
+        self.account.deposit(amount)
+    def make_withdraw(self, amount):
+        self.account.withdraw(amount)
+    def display_user_balance(self):
+        print(f"{self.name}'s account balance is {self.account.balance}")
+
+user1=User("ali","ali@gmail.com")
+user1.make_deposit(500)
+user1.display_user_balance()
