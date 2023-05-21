@@ -13,7 +13,7 @@
         {% for i in range(x): %}
         <tr>
             {% for j in range(y): %}
-            <td class="color{{j%2}}"></td>
+            <td class="color{{(i+j)%2}}"></td>
             {% endfor %}
             
         </tr>
