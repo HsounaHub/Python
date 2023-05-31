@@ -1,6 +1,7 @@
 from flask_app import app
 from flask import render_template, request, redirect, session
 from flask_app.models.user_model import User
+from flask_app.models.recipes_model import Recipe
 from flask_bcrypt import Bcrypt
 from flask import flash
 
@@ -63,8 +64,9 @@ def dash():
         "id":  session["user_id"]
     }
     logged_user = User.get_by_id(data)
+    all_recip=Recipe.get_all()
 
-    return render_template("dashboard.html", user=logged_user)
+    return render_template("dashboard.html", user=logged_user,recipes=all_recip)
 @app.route("/logout")
 def logout():
 

@@ -10,17 +10,17 @@ class Recipe:
         self.description = data["description"]
         self.instruction = data["instruction"]
         self.Date_Cooked = data["Date_Cooked"]
-        self.unedr_30 = data["unedr_30"]
+        self.under_30 = data["under_30"]
         self.created_at = data["created_at"]
         self.updated_at = data["updated_at"]
         self.user_id = data["user_id"]
 
     @classmethod
-    def create_party(cls, data):
+    def create_recipy(cls, data):
         
         query = """
                     INSERT INTO recipes (name, description,instruction,Date_Cooked,under_30,user_id)
-                    VALUES (%(name)s,%(description)s,%(instruction)s,%(Date_Cooked)s,%(unedr_30)s,%(user_id)s);
+                    VALUES (%(name)s,%(description)s,%(instruction)s,%(Date_Cooked)s,%(under_30)s,%(user_id)s);
                 """
         
 
@@ -33,8 +33,8 @@ class Recipe:
                         SELECT * FROM recipes
                         JOIN users
                         ON recipes.user_id = users.id ;
-                 """
-        results = connectToMySQL(DB).query_db(query)
+                """
+        results = connectToMySQL(DB_NAME).query_db(query)
 
         all_recipes = []
 
@@ -55,3 +55,25 @@ class Recipe:
             all_recipes.append(this_recipe)
 
         return all_recipes
+    @classmethod
+    def get_by_id(cls, data):
+        query = """
+        SELECT * FROM recipes WHERE id = %(id)s;
+        """
+        result = connectToMySQL(DB_NAME).query_db(query,data)
+        return cls(result[0])
+    
+    @classmethod
+    def delete(cls, data):
+        query = """
+        delete from recipes where id=%(id)s;
+        """
+        return connectToMySQL(DB_NAME).query_db(query,data)
+
+    @classmethod
+    def edit_recipe(cls, data):
+        query = """
+        UPDATE recipes SET name = %(name)s, description = %(description)s, instruction= %(instruction)s , Date_Cooked = %(Date_Cooked)s, under_30= %(under_30)s
+        WHERE id = %(id)s;
+        """
+        return connectToMySQL(DB_NAME).query_db(query, data)
