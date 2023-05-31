@@ -1,6 +1,6 @@
 from flask import Flask,render_template,request,redirect
-from users import USER
-app = Flask(__name__)
+from flask_app.models.user_model import USER
+from flask_app import app
 
 @app.route('/users')
 def show_users():
@@ -20,8 +20,3 @@ def rend():
 def user_info(id):
     data={'id':id}
     return render_template("show_one.html",y=USER.show_one(data))
-
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
