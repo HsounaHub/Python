@@ -52,6 +52,7 @@ def login():
 
     # All Good up to here
     session['user_id'] = user_in_db.id
+    session['user_name'] = user_in_db.first_name
     return redirect("/recipes")
 @app.route("/recipes")
 def dash():
